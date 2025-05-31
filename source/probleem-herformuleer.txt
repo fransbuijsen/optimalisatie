@@ -1,0 +1,7 @@
+Laat me proberen te formuleren wat ik snap. 
+We hebben per regel 4 (mode, 0/1) paren.  
+Iedere mode M0..M76 moet een eigen prioriteit P0..P76 krijgen, waarbij een laag nummer prioriteit heeft over een hogere prioriteit-nummer.
+Iedere regel heeft een waarde 0/1 als volgt te bepalen:
+Vind de mode met het laagste P-nummer. Indien meerdere van dezelfde geldt de eerste. 
+Diens 0/1 waarde is de waarde van de regel
+De toekenning van prioriteiten, dus een vector afbeelding P(0..76) ==> M(0..76), moet zodanig geoptimaliseerd worden dat er zoveel mogelijk 1-waardes uitkome

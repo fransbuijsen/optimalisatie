@@ -1,0 +1,35 @@
+Hallo Frans,
+
+Hierbij een sample van mijn optimalisatie probleem. Ik heb 4 cases met
+telkens wat andere inhoud. En ook veel grotere verzamelingen. De
+analyse daarvan duurt veel langer en zou je pas moeten doen als het
+hiermee lukt. En veel verschil (if any) zal het niet maken.
+
+Iedere regel heeft 8 getallen. Zie dat als 4 paren waarin getal 1 is een
+mode en getal 2 is een boolean. In dit geval loopt is de mode [0...76].
+
+We kennen nu aan iedere mode een unieke prioriteit toe [dus ook
+[0..76]. Om technische reden is een lagere prioriteit beter. De
+prioriteiten werken als volgt. Elke regel in het bestand geeft een
+waarde 0 of 1 als volgt: Kies de mode met de laagste prioriteit en als
+daar meer van zijn de eerste die je tegenkomt. De regel krijgt dan de
+waarde van die mode.
+
+Voorbeeld: Vier modes en de regel: 0,1,3,0,2,0,2,1
+
+Deze regel geeft een 1 als mode 0 de hoogste prioriteit heeft (helaas
+dus prioriteit 0) en anders een 0 want als 2 de hoogste heeft telt de
+eerste 2 en die geeft 0. Wat de prioriteit van mode 1 is maakt niet
+uit.
+
+De toekenning van de prioriteiten is wat we willen optimaliseren. Bij
+het aangehangen bestand krijg ik: Score = 67480/80958 (83.35%)
+
+Uitleggen waar je tot aan je nek inzit, is vaak moeilijk.
+Vragen staat vrij.
+
+Met vriendelijke groet, Hans
+
+PS: Je kunt met bijv. de eerste 10000 regels beginnen als dit teveel
+regels zijn. Mijn echte dataset is 1M+ regels maar er komt weinig
+anders uit dan met deze set.
