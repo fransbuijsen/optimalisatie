@@ -3,11 +3,33 @@ import random
 import numpy as np
 import time
 import sys
-from processed.modefb_data import modefb_data
+import os
+
+# Try different import paths to handle different directory structures
+try:
+    # First try to import from source.processed
+    from source.processed.modefb_data import modefb_data
+    print("Imported data from source.processed.modefb_data")
+except ImportError:
+    try:
+        # Try importing directly from processed if we're in the source directory
+        from processed.modefb_data import modefb_data
+        print("Imported data from processed.modefb_data")
+    except ImportError:
+        try:
+            # If we're in the parent directory and source is in path
+            sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+            from source.processed.modefb_data import modefb_data
+            print("Imported data using absolute path")
+        except ImportError:
+            print("ERROR: Could not import modefb_data. Please make sure you're running the script from the correct directory.")
+            print("The data file should be at source/processed/modefb_data.py")
+            sys.exit(1)
 
 # Constants
 POPULATION_SIZE = 100
 GENERATIONS = 500
+EARLY_STOP = 100  # Stop when no improvement for this long
 TOURNAMENT_SIZE = 5
 MUTATION_RATE = 0.1
 NUM_MODES = 77  # Modes from 0 to 76
@@ -187,8 +209,8 @@ def genetic_algorithm(data):
         # Replace the old population
         population = new_population
         
-        # Optimization: if no improvement for 100 generations, break
-        if generation - best_generation > 100:
+        # Optimization: if no improvement for EARLY_STOP generations, break
+        if generation - best_generation > EARLY_STOP:
             print(f"No improvement for 100 generations. Stopping at generation {generation}.")
             break
     
@@ -242,6 +264,12 @@ def invert_assignment(assignment):
 def main():
     print("Loading data...")
     data = modefb_data
+    
+    # Verify data format
+    if not data or not isinstance(data, list):
+        print("ERROR: Data format is incorrect. Expected a list of lists of tuples.")
+        sys.exit(1)
+        
     print(f"Loaded {len(data)} lines of data")
     
     print("Starting genetic algorithm...")
