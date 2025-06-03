@@ -29,7 +29,7 @@ except ImportError:
 # Constants
 POPULATION_SIZE = 100
 GENERATIONS = 500
-EARLY_STOP = 100  # Stop when no improvement for this long
+EARLY_STOP = 1000  # Stop when no improvement for this long
 TOURNAMENT_SIZE = 5
 MUTATION_RATE = 0.1
 NUM_MODES = 77  # Modes from 0 to 76
